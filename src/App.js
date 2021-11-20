@@ -4,6 +4,7 @@ import './App.css';
 function App() {
 
   let [hrs,setHrs] = useState(0)
+  let [hInput,setHInput] = useState(0)
   let [mins,setMins] = useState(0)
   let [date,setDate] = useState(new Date())
   let [recipe,setRecipe] = useState(0.15)
@@ -17,19 +18,18 @@ function App() {
     useEffect(() => {
       console.log('hrs ',hrs);
       console.log('recipe ',recipe);
-      
+      setHrs(Math.floor(hInput * recipe).toFixed(1));
+      setMins(Math.floor((hInput * recipe) * 60).toFixed(1));
       let d = addHours(date,Number(hrs)).toString();
-      console.log('d ',d);
-      
       setPlazmaDate(d.slice(0,d.indexOf('G')));
   
-  },[recipe,hrs,date])
+  },[recipe,hInput,date])
+  
 
   const onChange = (e) => {
     if(e.target.name === 'hours'){
-      setHrs(Math.floor(e.target.value * recipe).toFixed(1));
-      setMins(Math.floor((e.target.value * recipe) * 60).toFixed(1));
-    }
+      setHInput(e.target.value);
+        }
     if(e.target.name === 'date') setDate(new Date(e.target.value));
     if(e.target.name === 'recipes'){ 
       switch (e.target.value) {
