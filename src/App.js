@@ -16,14 +16,12 @@ function App() {
     return newDate;
   }
     useEffect(() => {
-      console.log('hrs ',hrs);
-      console.log('recipe ',recipe);
       setHrs(Math.floor(hInput * recipe).toFixed(1));
       setMins(Math.floor((hInput * recipe) * 60).toFixed(1));
       let d = addHours(date,Number(hrs)).toString();
       setPlazmaDate(d.slice(0,d.indexOf('G')));
   
-  },[recipe,hInput,date])
+  },[recipe,hInput,date,hrs])
   
 
   const onChange = (e) => {
