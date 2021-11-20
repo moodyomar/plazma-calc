@@ -19,6 +19,7 @@ function App() {
       setHrs(Math.floor(hInput * recipe).toFixed(1));
       setMins(Math.floor((hInput * recipe) * 60).toFixed(1));
       let d = addHours(date,Number(hrs)).toString();
+      d.replace('Saturday','שבת')
       setPlazmaDate(d.slice(0,d.indexOf('G')));
   
   },[recipe,hInput,date,hrs])
@@ -49,9 +50,10 @@ function App() {
   
   const reset = (e) => {
     e.preventDefault()
-    console.log('hrs ',hrs);
-    console.log('date ',date);
     let form = document.querySelector('form');
+    let dd = document.querySelector('#date');
+    dd.value = ''
+    setPlazmaDate('')
     form.reset()
   }
 
@@ -59,7 +61,7 @@ function App() {
     <div className="App bg-dark text-white d-flex align-items-center justify-content-center">
       <form onSubmit={e => reset(e)}>
       <div className="d-flex mb-4 h2 justify-content-center">
-        חישוב שעות פלזמה
+        חישוב שעות פוזפוז
       </div>
      <div className="result mb-3 mx-auto">
     <div className="d-flex justify-content-around bg-light text-dark">
