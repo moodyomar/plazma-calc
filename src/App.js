@@ -9,6 +9,7 @@ function App() {
   let [date,setDate] = useState(new Date())
   let [recipe,setRecipe] = useState(0.15)
   let [plazmaDate,setPlazmaDate] = useState('---')
+  let [toggle,setToggle] = useState(false)
 
   function addHours(date, hours) {
     const newDate = new Date(date);
@@ -16,10 +17,9 @@ function App() {
     return newDate;
   }
     useEffect(() => {
-      setHrs(Math.floor(hInput * recipe).toFixed(1));
-      setMins(Math.floor((hInput * recipe) * 60).toFixed(1));
+      setHrs(Math.ceil(hInput * recipe).toFixed(1));
+      setMins(Math.ceil((hInput * recipe) * 60).toFixed(1));
       let d = addHours(date,Number(hrs)).toString();
-      d.replace('Saturday','שבת')
       setPlazmaDate(d.slice(0,d.indexOf('G')));
   
   },[recipe,hInput,date,hrs])
@@ -28,6 +28,7 @@ function App() {
   const onChange = (e) => {
     if(e.target.name === 'hours'){
       setHInput(e.target.value);
+      setToggle(true)
         }
     if(e.target.name === 'date') setDate(new Date(e.target.value));
     if(e.target.name === 'recipes'){ 
@@ -55,6 +56,8 @@ function App() {
     dd.value = ''
     setPlazmaDate('')
     form.reset()
+    setToggle(false)
+    setHInput(0);
   }
 
   return (
@@ -69,16 +72,19 @@ function App() {
     <label htmlFor="total-minutes">סך הכל דקות</label>
     </div>
     <div className="d-flex justify-content-around">
-    <label className="h3 mt-1" htmlFor="total-hours">{`${hrs}`}<span> שעות</span></label>
-    <label className="h3 mt-1" htmlFor="total-minutes">{`${mins}`}<span> דקות</span></label>
+    <label className="h3 mt-1 text-warning" htmlFor="total-hours">{`${hrs}`}<span> שעות</span></label>
+    <label className="h3 mt-1 text-warning" htmlFor="total-minutes">{`${mins}`}<span> דקות</span> 
+    </label> 
+    
     </div>
+
     <div className="d-flex mt-4 justify-content-around bg-light text-dark">
     <label htmlFor="plazma-date">הפלאזמה תסתיים ביום</label>
     </div>
     <div className="d-flex justify-content-around">
-      {hrs &&
-    <label className="h4 mt-2" htmlFor="plazma-date">{plazmaDate}</label>
-      }
+{  toggle &&
+    <label className="h4 mt-2 text-warning" htmlFor="plazma-date">{plazmaDate}</label>
+}
     </div>
   </div>
   <div className="d-flex justify-content-around my-4 align-items-center">
@@ -102,7 +108,7 @@ function App() {
      </div>
      
   <div className="d-flex justify-content-center mt-4">
-  <button className="btn btn-light">איפוס הכל</button>
+  <button className="btn btn-danger">איפוס הכל</button>
   </div>
   </form>
     </div>
