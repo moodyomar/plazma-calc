@@ -109,12 +109,12 @@ function App() {
        <input type="datetime-local" className="form-control w-50" name="date" id="date" onChange={e => onChange(e)} />
      </div>
      
-  <div className="d-flex justify-content-center mt-5">
+
+  <div className="d-flex justify-content-center mt-4">
   <button className="btn btn-danger">איפוס הכל</button>
   </div>
   </form>
     </div>
   );
 }
-
 export default App;
