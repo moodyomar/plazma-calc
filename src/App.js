@@ -18,8 +18,8 @@ function App() {
     return newDate;
   }
     useEffect(() => {
-      setHrs(Math.ceil(hInput * recipe).toFixed(1));
-      setMins(Math.ceil((hInput * recipe) * 60).toFixed(1));
+      setHrs((hInput * recipe).toFixed(1));
+      setMins(((hInput * recipe) * 60).toFixed(1));
       let d = addHours(date,Number(hrs)).toString();
       setPlazmaDate(d.slice(0,d.indexOf('G')));
   
