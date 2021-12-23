@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Calc from './Calc';
 import HightAvg from './HightAvg';
+import {TiArrowBack } from 'react-icons/ti';
 
 function App() {
 
@@ -16,7 +17,7 @@ let [open,toggleOpen] = useState(false)
         toggleHavg(false)
         toggleCalc(false)
         toggleBtn(true)
-        }} className='btn btn-danger mb-2'>CLOSE</button>}
+        }} className='btn btn-danger mb-2'> <TiArrowBack/>חזור</button>}
       { showBtn && <button className='btn btn-light mb-4' onClick={() => {
         toggleCalc(s => !s)
         toggleHavg(false)

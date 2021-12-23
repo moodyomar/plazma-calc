@@ -5,61 +5,63 @@ import { AiFillCalculator,AiOutlineFieldTime,AiOutlineColumnHeight } from 'react
 
 const Calc = () => { 
 
-  let [finalHeight,setFinalHeight] = useState(0)
-  let [hInput,setHInput] = useState(0)
   let [initHeight,setInitHeight] = useState(0)
+  let [finalHeight,setFinalHeight] = useState(0)
+  let [hrs,setHrs] = useState(0)
   let [date,setDate] = useState(new Date())
-  let [recipe,setRecipe] = useState(0.15)
-  let [plazmaDate,setPlazmaDate] = useState('---')
-  let [toggle,setToggle] = useState(false)
+  let [avrg,setAvrg] = useState(4.5)
+  let [pressure,setPressure] = useState(95)
+  let [finishDate,setFinishDate] = useState('---')
+
+  const pressures = {
+    95:4.5,
+    98:4.8,
+    100:5,
+    102:5.3,
+    104:5.6,
+    106:5.9,
+    108:6.2,
+    110:6.5,
+    112:6.8
+  }
+
+  useEffect(() => {
+    setFinalHeight(Number((hrs * avrg) / 1000) + Number(initHeight));
+    let d = addHours(date,Number(hrs)).toString();
+    setFinishDate(d.slice(0,d.indexOf('G')));
+
+  },[avrg,pressure,hrs,initHeight])
+
+  const onChange = (e) => {
+    if(e.target.name === 'init-height'){ 
+setInitHeight(e.target.value);
+    }
+    if(e.target.name === 'hours'){ 
+      setHrs(e.target.value);
+      console.log('avrg',avrg);
+      
+setFinalHeight((e.target.value * avrg)/1000);
+    }
+    if(e.target.name === 'paces'){ 
+      setAvrg(pressures[e.target.value]);
+      setPressure(e.target.value);
+    }
+  }
 
   function addHours(date, hours) {
     const newDate = new Date(date);
     newDate.setHours(newDate.getHours() + hours);
     return newDate;
   }
-    useEffect(() => {
-      setFinalHeight((hInput * recipe).toFixed(1));
-      setInitHeight(((hInput * recipe) * 60).toFixed(1));
-      let d = addHours(date,Number(finalHeight)).toString();
-      setPlazmaDate(d.slice(0,d.indexOf('G')));
-  
-  },[recipe,hInput,date,finalHeight])
-  
-
-  const onChange = (e) => {
-    if(e.target.name === 'hours'){
-      setHInput(e.target.value);
-      setToggle(true)
-        }
-    if(e.target.name === 'date') setDate(new Date(e.target.value));
-    if(e.target.name === 'recipes'){ 
-      switch (e.target.value) {
-        case 'v9':
-          setRecipe(0.15);
-          break;
-  
-        case 'v10':
-          setRecipe(0.10);
-          break;
-      
-        default:
-          break;
-      }
-    }
-  }
-
-
   
   const reset = (e) => {
     e.preventDefault()
     let form = document.querySelector('form');
     let dd = document.querySelector('#date');
     dd.value = ''
-    setPlazmaDate('')
+    setFinishDate('')
     form.reset()
-    setToggle(false)
-    setHInput(0);
+    setAvrg(0);
   }
 
 return(
@@ -71,8 +73,8 @@ return(
       </div>
      <div className="result mb-3 mx-auto">
     <div className="d-flex justify-content-around bg-light text-dark">
-    <label  htmlFor="total-hours">גובה בסיום</label>
-    <label htmlFor="total-minutes">גובה בהתחלה</label>
+    <label  htmlFor="total-hours">F גובה בסיום</label>
+    <label htmlFor="total-minutes">F גובה בהתחלה</label>
     </div>
     <div className="d-flex justify-content-around">
     <label className="h3 mt-1 text-warning" htmlFor="total-hours">{`${finalHeight}`}<span> </span></label>
@@ -82,18 +84,19 @@ return(
     </div>
 
     <div className="d-flex mt-4 justify-content-around bg-light text-dark">
-    <label htmlFor="plazma-date">תאריך סיום</label>
+    <label htmlFor="finish-date">תאריך סיום</label>
     </div>
     <div className="d-flex justify-content-around">
-{  toggle &&
-    <label className="h4 mt-2 text-warning" htmlFor="plazma-date">{plazmaDate}</label>
-}
+
+    <label className="h4 mt-2 text-warning" htmlFor="finish-date">{finishDate}</label>
+
     </div>
   </div>
   <div className="d-flex justify-content-around my-5 align-items-center">
-       <div className="d-flex">
-       <label className='me-2' htmlFor="pressure">לחץ</label>
-       <select name="paces" id="paces" className='form-control'>
+       <div className="d-flex align-items-center">
+       <label className='me-2 checkbox-text' htmlFor="pressure">לחץ</label>
+       <select onChange={e => onChange(e)} name="paces" id="paces" 
+       className='form-control pressure-box'>
          <option value="95">95</option>
          <option value="98">98</option>
          <option value="100">100</option>
@@ -105,9 +108,13 @@ return(
          <option value="112">112</option>
        </select>
        </div>
-       <div className="d-flex">
-       <label className='me-2' htmlFor="pressure">Gas Flow</label>
+       <div className="d-flex align-items-center">
+       <label className='me-2 checkbox-text' htmlFor="pressure">Gas Flow</label>
        <input type="checkbox" name="recipes" value="v10" id="gasflow" onChange={e => onChange(e)}/>
+       </div>
+       <div className="d-flex align-items-center">
+       <label className='me-2 checkbox-text' htmlFor="pressure">חמצן גבוה</label>
+       <input type="checkbox" name="recipes" value="higho" id="higho" onChange={e => onChange(e)}/>
        </div>
      </div>
 

@@ -45,7 +45,13 @@ direction: rtl;
 span{
   font-size: 0.9rem;
 }
-#gasflow{
-  width: 30px;
-  height: 30px;
+#gasflow,#higho{
+  width: 35px;
+  height: 35px;
+}
+.checkbox-text{
+  font-size: 1rem;
+}
+.pressure-box{
+  height: 35px;
 }

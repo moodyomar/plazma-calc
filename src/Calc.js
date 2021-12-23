@@ -102,7 +102,7 @@ return(
      </div>
 
      <div className="d-flex justify-content-end text-center mb-2">
-       <label htmlFor="hours"  className="me-2"> שעות גידול  <AiOutlineFieldTime/></label>
+       <label htmlFor="hours"  className="me-5"> שעות גידול  <AiOutlineFieldTime/></label>
       
        <label htmlFor="date" className="ms-2" id="date">תחילת פלזמה <AiTwotoneCalendar/></label>
      </div>
