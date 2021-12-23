@@ -125,8 +125,8 @@ return(
        <label htmlFor="date" className="ms-5" id="date"> נכנסה בגובה <AiOutlineColumnHeight/> </label>
      </div>
      <div className="d-flex justify-content-between">
-       <input type="tel" name="hours" className="form-control w-50 me-2" id="hours" onChange={e => onChange(e)} />
-       <input type="tel" className="form-control w-50" name="init-height" id="init-height" onChange={e => onChange(e)} />
+       <input type="text" name="hours" className="form-control w-50 me-2" id="hours" onChange={e => onChange(e)} />
+       <input type="text" className="form-control w-50" name="init-height" id="init-height" onChange={e => onChange(e)} />
      </div>
      
 
