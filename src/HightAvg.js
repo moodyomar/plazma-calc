@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import './App.css';
-import { AiFillCalculator,AiOutlineFieldTime,AiTwotoneCalendar } from 'react-icons/ai';
+import { AiFillCalculator,AiOutlineFieldTime,AiOutlineColumnHeight } from 'react-icons/ai';
 
 const Calc = () => { 
 
@@ -104,19 +104,21 @@ return(
          <option value="110">110</option>
          <option value="112">112</option>
        </select>
-       {/* <label className='me-2' htmlFor="pressure">Gas Flow</label> */}
-       {/* <input type="radio" name="recipes" value="v10" id="v10" onChange={e => onChange(e)}/> */}
+       </div>
+       <div className="d-flex">
+       <label className='me-2' htmlFor="pressure">Gas Flow</label>
+       <input type="checkbox" name="recipes" value="v10" id="gasflow" onChange={e => onChange(e)}/>
        </div>
      </div>
 
      <div className="d-flex justify-content-center text-center mb-2">
        <label htmlFor="hours"  className="me-2"> שעות גידול  <AiOutlineFieldTime/></label>
       
-       <label htmlFor="date" className="ms-5" id="date"> נכנסה בקצב </label>
+       <label htmlFor="date" className="ms-5" id="date"> נכנסה בגובה <AiOutlineColumnHeight/> </label>
      </div>
      <div className="d-flex justify-content-between">
        <input type="tel" name="hours" className="form-control w-50 me-2" id="hours" onChange={e => onChange(e)} />
-       <input type="tel" className="form-control w-50" name="date" id="date" onChange={e => onChange(e)} />
+       <input type="tel" className="form-control w-50" name="init-height" id="init-height" onChange={e => onChange(e)} />
      </div>
      
 
