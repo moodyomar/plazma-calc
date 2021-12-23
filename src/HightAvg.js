@@ -5,9 +5,9 @@ import { AiFillCalculator,AiOutlineFieldTime,AiTwotoneCalendar } from 'react-ico
 
 const Calc = () => { 
 
-  let [hrs,setHrs] = useState(0)
+  let [finalHeight,setFinalHeight] = useState(0)
   let [hInput,setHInput] = useState(0)
-  let [mins,setMins] = useState(0)
+  let [initHeight,setInitHeight] = useState(0)
   let [date,setDate] = useState(new Date())
   let [recipe,setRecipe] = useState(0.15)
   let [plazmaDate,setPlazmaDate] = useState('---')
@@ -19,12 +19,12 @@ const Calc = () => {
     return newDate;
   }
     useEffect(() => {
-      setHrs((hInput * recipe).toFixed(1));
-      setMins(((hInput * recipe) * 60).toFixed(1));
-      let d = addHours(date,Number(hrs)).toString();
+      setFinalHeight((hInput * recipe).toFixed(1));
+      setInitHeight(((hInput * recipe) * 60).toFixed(1));
+      let d = addHours(date,Number(finalHeight)).toString();
       setPlazmaDate(d.slice(0,d.indexOf('G')));
   
-  },[recipe,hInput,date,hrs])
+  },[recipe,hInput,date,finalHeight])
   
 
   const onChange = (e) => {
@@ -71,18 +71,18 @@ return(
       </div>
      <div className="result mb-3 mx-auto">
     <div className="d-flex justify-content-around bg-light text-dark">
-    <label  htmlFor="total-hours">.</label>
-    <label htmlFor="total-minutes">.</label>
+    <label  htmlFor="total-hours">גובה בסיום</label>
+    <label htmlFor="total-minutes">גובה בהתחלה</label>
     </div>
     <div className="d-flex justify-content-around">
-    <label className="h3 mt-1 text-warning" htmlFor="total-hours">{`${hrs}`}<span> </span></label>
-    <label className="h3 mt-1 text-warning" htmlFor="total-minutes">{`${mins}`}<span> </span> 
+    <label className="h3 mt-1 text-warning" htmlFor="total-hours">{`${finalHeight}`}<span> </span></label>
+    <label className="h3 mt-1 text-warning" htmlFor="total-minutes">{`${initHeight}`}<span> </span> 
     </label> 
     
     </div>
 
     <div className="d-flex mt-4 justify-content-around bg-light text-dark">
-    <label htmlFor="plazma-date">.</label>
+    <label htmlFor="plazma-date">תאריך סיום</label>
     </div>
     <div className="d-flex justify-content-around">
 {  toggle &&
@@ -92,23 +92,31 @@ return(
   </div>
   <div className="d-flex justify-content-around my-5 align-items-center">
        <div className="d-flex">
-       {/* <label htmlFor="v9">V9 <span className="text-warning fw-bold">-</span> 15%</label>
-       <input type="radio" name="recipes" value="v9" id="v9" defaultChecked="checked" onChange={e => onChange(e)}/>
-       </div>
-       <div className="d-flex">
-       <label htmlFor="v10">V10 <span className="text-warning fw-bold">-</span> 10%</label>
-       <input type="radio" name="recipes" value="v10" id="v10" onChange={e => onChange(e)}/> */}
+       <label className='me-2' htmlFor="pressure">לחץ</label>
+       <select name="paces" id="paces" className='form-control'>
+         <option value="95">95</option>
+         <option value="98">98</option>
+         <option value="100">100</option>
+         <option value="102">102</option>
+         <option value="104">104</option>
+         <option value="106">106</option>
+         <option value="108">108</option>
+         <option value="110">110</option>
+         <option value="112">112</option>
+       </select>
+       {/* <label className='me-2' htmlFor="pressure">Gas Flow</label> */}
+       {/* <input type="radio" name="recipes" value="v10" id="v10" onChange={e => onChange(e)}/> */}
        </div>
      </div>
 
-     <div className="d-flex justify-content-end text-center mb-2">
+     <div className="d-flex justify-content-center text-center mb-2">
        <label htmlFor="hours"  className="me-2"> שעות גידול  <AiOutlineFieldTime/></label>
       
-       <label htmlFor="date" className="ms-2" id="date"> <AiTwotoneCalendar/></label>
+       <label htmlFor="date" className="ms-5" id="date"> נכנסה בקצב </label>
      </div>
      <div className="d-flex justify-content-between">
        <input type="tel" name="hours" className="form-control w-50 me-2" id="hours" onChange={e => onChange(e)} />
-       <input type="datetime-local" className="form-control w-50" name="date" id="date" onChange={e => onChange(e)} />
+       <input type="tel" className="form-control w-50" name="date" id="date" onChange={e => onChange(e)} />
      </div>
      
 
