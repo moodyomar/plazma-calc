@@ -26,7 +26,8 @@ const Calc = () => {
   }
 
   useEffect(() => {
-    setFinalHeight(Number((hrs * avrg) / 1000) + Number(initHeight));
+    setDate(new Date())
+    setFinalHeight((Number((hrs * avrg) / 1000) + Number(initHeight)).toFixed(2));
     let d = addHours(date,Number(hrs)).toString();
     setFinishDate(d.slice(0,d.indexOf('G')));
 
