@@ -12,12 +12,20 @@ background-color: rgba(17, 17, 17, 0.585);
 overflow: hidden;
 }
 .App{
-width: 400px;
-height: 600px;
+display: flex;
+flex-direction: column;
+width: 200px;
+height: 200px;
 padding: 25px;
 border-radius: 10px;
 font-size: 1.3rem;
  font-family: 'Rubik', sans-serif;
+ transition: all .3s ease-in;
+}
+.open{
+  width: 400px;
+  height: 600px;
+  transition: all .25s ease-out;
 }
 input[type=radio]{
 width: 30px;
