@@ -84,7 +84,6 @@ setInitHeight(e.target.value);
     dd.value = ''
     setFinishDate('')
     form.reset()
-    setAvrg(0);
     setFinalHeight(0);
     setInitHeight(0);
   }
