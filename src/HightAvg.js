@@ -7,7 +7,7 @@ const Calc = () => {
 
   let [initHeight,setInitHeight] = useState(0)
   let [finalHeight,setFinalHeight] = useState(0)
-  let [hrs,setHrs] = useState(0)
+  let [hrs,setHrs] = useState(250)
   let [date,setDate] = useState(new Date())
   let [avrg,setAvrg] = useState(4.5)
   let [gasFlow,setGasFlow] = useState(false)
@@ -31,7 +31,7 @@ const Calc = () => {
     setFinalHeight((Number((hrs * (gasFlow ? avrg * 1.2 : avrg)) / 1000) + Number(initHeight)).toFixed(2));
     let d = addHours(date,Number(hrs)).toString();
     setFinishDate(d.slice(0,d.indexOf('G')));    
-    
+    console.log('ueff',hrs);
   },[avrg,pressure,hrs,initHeight,gasFlow])
 
   const onChange = (e) => {
@@ -46,8 +46,24 @@ const Calc = () => {
 setInitHeight(e.target.value);
     }
     if(e.target.name === 'hours'){ 
-      setHrs(e.target.value);
-      setFinalHeight((e.target.value * avrg)/1000);
+      console.log(hrs);
+      setHrs(hrs - e.target.value);
+      console.log(hrs);
+      // setFinalHeight((e.target.value * avrg)/1000);
+    }
+    if(e.target.name === 'flow'){ 
+      switch (e.target.value) {
+        case 'f1':
+          setHrs(180);
+          break;
+  
+        case 'f2':
+          setHrs(250);
+          break;
+      
+        default:
+          break;
+      }
     }
     if(e.target.name === 'paces'){ 
       setAvrg(pressures[e.target.value]);
@@ -69,6 +85,8 @@ setInitHeight(e.target.value);
     setFinishDate('')
     form.reset()
     setAvrg(0);
+    setFinalHeight(0);
+    setInitHeight(0);
   }
 
 return(
@@ -99,7 +117,7 @@ return(
 
     </div>
   </div>
-  <div className="d-flex justify-content-around my-5 align-items-center">
+  <div className="d-flex justify-content-around my-3 align-items-center">
        <div className="d-flex align-items-center">
        <label className='me-2 checkbox-text' htmlFor="pressure">לחץ</label>
        <select onChange={e => onChange(e)} name="paces" id="paces" 
@@ -124,9 +142,18 @@ return(
        <input type="checkbox" name="recipes" value="higho" id="higho" onChange={e => onChange(e)}/>
        </div>
      </div>
-
+       <div className='d-flex justify-content-around'>
+       <div className="d-flex my-2">
+       <label htmlFor="f1">Flow 1</label>
+       <input type="radio" name="flow" value="f1" id="f1" onChange={e => onChange(e)}/>
+       </div>
+       <div className="d-flex my-2">
+       <label htmlFor="f1">Flow 2+</label>
+       <input type="radio" name="flow" value="f2" id="f2" defaultChecked="checked" onChange={e => onChange(e)}/>
+       </div>
+       </div>
      <div className="d-flex justify-content-center text-center mb-2">
-       <label htmlFor="hours"  className="me-2"> שעות גידול  <AiOutlineFieldTime/></label>
+       <label htmlFor="hours"  className="me-2"> שעות בגידול  <AiOutlineFieldTime/></label>
       
        <label htmlFor="date" className="ms-5" id="date"> נכנסה בגובה <AiOutlineColumnHeight/> </label>
      </div>
