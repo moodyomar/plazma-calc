@@ -10,6 +10,7 @@ const Calc = () => {
   let [hrs,setHrs] = useState(0)
   let [date,setDate] = useState(new Date())
   let [avrg,setAvrg] = useState(4.5)
+  let [gasFlow,setGasFlow] = useState(false)
   let [pressure,setPressure] = useState(95)
   let [finishDate,setFinishDate] = useState('---')
 
@@ -27,21 +28,26 @@ const Calc = () => {
 
   useEffect(() => {
     setDate(new Date())
-    setFinalHeight((Number((hrs * avrg) / 1000) + Number(initHeight)).toFixed(2));
+    setFinalHeight((Number((hrs * (gasFlow ? avrg * 1.2 : avrg)) / 1000) + Number(initHeight)).toFixed(2));
     let d = addHours(date,Number(hrs)).toString();
-    setFinishDate(d.slice(0,d.indexOf('G')));
-
-  },[avrg,pressure,hrs,initHeight])
+    setFinishDate(d.slice(0,d.indexOf('G')));    
+    
+  },[avrg,pressure,hrs,initHeight,gasFlow])
 
   const onChange = (e) => {
+    if(e.target.name === 'gas-flow'){ 
+      const checked = e.target.checked;
+      if(checked) {
+        setGasFlow(true);
+      } else setGasFlow(false);
+      
+    }
     if(e.target.name === 'init-height'){ 
 setInitHeight(e.target.value);
     }
     if(e.target.name === 'hours'){ 
       setHrs(e.target.value);
-      console.log('avrg',avrg);
-      
-setFinalHeight((e.target.value * avrg)/1000);
+      setFinalHeight((e.target.value * avrg)/1000);
     }
     if(e.target.name === 'paces'){ 
       setAvrg(pressures[e.target.value]);
@@ -111,7 +117,7 @@ return(
        </div>
        <div className="d-flex align-items-center">
        <label className='me-2 checkbox-text' htmlFor="pressure">Gas Flow</label>
-       <input type="checkbox" name="recipes" value="v10" id="gasflow" onChange={e => onChange(e)}/>
+       <input type="checkbox" name="gas-flow" value="gas-flow" id="gasflow" onChange={e => onChange(e)}/>
        </div>
        <div className="d-flex align-items-center">
        <label className='me-2 checkbox-text' htmlFor="pressure">חמצן גבוה</label>
