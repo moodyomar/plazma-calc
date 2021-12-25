@@ -142,7 +142,7 @@ return(
        <input type="checkbox" name="recipes" value="higho" id="higho" onChange={e => onChange(e)}/>
        </div>
      </div>
-       <div className='d-flex justify-content-around'>
+       <div className='d-flex justify-content-around border-dashed my-2'>
        <div className="d-flex my-2">
        <label htmlFor="f1">Flow 1</label>
        <input type="radio" name="flow" value="f1" id="f1" onChange={e => onChange(e)}/>

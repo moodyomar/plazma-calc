@@ -18,7 +18,7 @@ width: 200px;
 height: 200px;
 padding: 25px;
 border-radius: 10px;
-font-size: 1.3rem;
+font-size: 1.2rem;
  font-family: 'Rubik', sans-serif;
  transition: all .3s ease-in;
 }
@@ -54,4 +54,7 @@ span{
 }
 .pressure-box{
   height: 35px;
+}
+.border-dashed{
+  border: dashed 2px #fff;
 }
