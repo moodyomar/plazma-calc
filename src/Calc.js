@@ -39,8 +39,8 @@ const Calc = () => {
           setRecipe(0.15);
           break;
   
-        case 'v10':
-          setRecipe(0.10);
+        case 'v12':
+          setRecipe(0.12);
           break;
       
         default:
@@ -96,8 +96,8 @@ return(
        <input type="radio" name="recipes" value="v9" id="v9" defaultChecked="checked" onChange={e => onChange(e)}/>
        </div>
        <div className="d-flex">
-       <label htmlFor="v10">V10 <span className="text-warning fw-bold">-</span> 10%</label>
-       <input type="radio" name="recipes" value="v10" id="v10" onChange={e => onChange(e)}/>
+       <label htmlFor="v12">v12 <span className="text-warning fw-bold">-</span> 12%</label>
+       <input type="radio" name="recipes" value="v12" id="v12" onChange={e => onChange(e)}/>
        </div>
      </div>
 
